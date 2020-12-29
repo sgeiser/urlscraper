@@ -1,0 +1,12 @@
+Metadata-Version: 1.1
+Name: camel-case-switcher
+Version: 2.0
+Summary: Python tool for changing style in name of functions etc. from camelCase/CamelCase to the underscore_style.
+Home-page: https://gitlab.com/Hares/camel-case-switcher
+Author: USSX Hares / Peter Zaitcev
+Author-email: ussx.hares@yandex.ru
+License: MIT
+Download-URL: https://gitlab.com/Hares/camel-case-switcher/repository/master/archive.tar.gz
+Description: UNKNOWN
+Keywords: camel_case,strings,undescore_style,snake_case
+Platform: UNKNOWN

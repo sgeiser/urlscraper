@@ -1,0 +1,106 @@
+Metadata-Version: 2.1
+Name: openapi-parser
+Version: 0.2.4
+Summary: OpenAPI 3.0 specs parser and client/server generator
+Home-page: https://gitlab.com/Hares-Lab/openapi-parser
+License: BSD 2-Clause License
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Software Development :: Code Generators
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Requires-Python: >=3.6.0
+Description-Content-Type: text/markdown
+Requires-Dist: dataclasses-json (>=0.5.2)
+Requires-Dist: functional-python (>=0.0.9)
+Requires-Dist: http-server-base (>=2.0.1)
+Requires-Dist: PyYAML (~=5.3.1)
+Requires-Dist: stringcase (<2.0.0,==1.2.0)
+Requires-Dist: tornado (>=6.0.4)
+Requires-Dist: license (==0.1a3)
+Requires-Dist: dataclasses (>=0.7) ; python_version < "3.7"
+Requires-Dist: lazy-object-proxy (==1.5.1) ; python_version < "3.8"
+Provides-Extra: all
+
+# OpenAPI 3.0 Parser
+This package provides functionality to analyze [OpenAPI 3.0 Specification] files
+and build clients and servers from that specification.
+
+For more details, please refer the [Project Documentation]
+
+### Example Usage
+From the command line:
+```bash
+$ python -m openapi_parser data/petstore.yaml 
+```
+
+From the Python:
+```python
+from openapi_parser.exporter import PackageWriter
+from openapi_parser.parser.loader import OpenApiParser
+
+def main():
+    parser = OpenApiParser.open('data/petstore.yaml')
+    parser.load_all()
+
+    package_writer = PackageWriter(parser)
+    package_writer.write_package()
+
+    return 0
+
+if (__name__ == '__main__'):
+    exit_code = main()
+    exit(exit_code)
+```
+
+### TODOs:
+ - [x] Model generator:
+    - [x] Core functionality
+    - [x] Class inheritance support
+    - [x] Enums support
+    - [ ] Required properties in combination with `readOnly`/`writeOnly`
+    - [x] Discriminator property support
+    - [ ] Cyclic refs resolution
+    - [ ] Support of `additionalProperties` inside class
+ - [x] Client generator
+    - [x] Core functionality
+    - [x] Smart body encoding
+    - [x] Smart response decoding
+    - [ ] `style`-encoding
+    - [ ] `schema` and `content` inside parameters conflict support
+    - [x] Enums for parameters support
+    - [ ] Cookies parameters support
+    - [x] Methods descriptions
+    - [ ] Authorization support
+ - [x] Metadata extractor
+    - [x] Version
+    - [x] Licence
+    - [x] Description
+    - [x] Servers
+    - [x] Security definitions
+ - [ ] Server generator
+ - [ ] Test coverage
+ - [ ] Documentation
+ - [x] Command-line interface
+    - [x] Basic CLI support
+    - [ ] Extended CLI support
+
+### See Also:
+ - [Project Documentation]
+ - [OpenAPI 3.0 Specification]
+ - [JSON Schema Standard]
+
+[Project Documentation]: https://hares-lab.gitlab.io/openapi-parser
+[OpenAPI 3.0 Specification]: https://swagger.io/specification
+[JSON Schema Standard]: https://tools.ietf.org/html/draft-wright-json-schema-validation-00
+
+

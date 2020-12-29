@@ -1,0 +1,72 @@
+Metadata-Version: 2.1
+Name: http-server-base
+Version: 2.0.5
+Summary: Library for simple HTTP server & REST HTTP server base based on Tornado. Includes: Logging requests and responses with Request Id; Configuration loading; Methods for requests proxying
+Home-page: https://gitlab.com/Hares-Lab/http-server-base
+License: MIT Licence
+Keywords: http,tornado,server,http-server,restapi,rest
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Internet :: Proxy Servers
+Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Utilities
+Requires-Python: >=3.6.0
+Description-Content-Type: text/markdown
+Requires-Dist: parse (>=1.18.0)
+Requires-Dist: dataclasses-json (>=0.5.2)
+Requires-Dist: typing-inspect (>=0.6.0)
+Requires-Dist: tornado (>=6.0.4)
+Requires-Dist: camel-case-switcher (>=2.0)
+Provides-Extra: all
+
+# HTTP Server Base
+This project is a Tornado-based HTTP-server base for easier development.
+The repository also includes a very simple example server.
+
+### Features
+ - Easy deployment;
+ - Implemented logging;
+ - Automated Request Id generation;
+ - Implemented configuration loading;
+ - Methods for proxying requests.
+
+### Installation
+##### Requirements
+Please, note, that Python 3.6.0+ is required for this tool.
+
+##### Installation with PyPI
+```bash
+python3.6 -m pip install http-server-base
+```
+
+##### Manual Installation
+1. Clone the repository
+2. Run as sudo/admin: `python3.6 -m pip install -e .`
+3. Import to your project: `import http_server_base`
+
+### Usage
+##### Starting Simple Server
+You can start simple HTTP server that logs all requests via console:
+```bash
+python3.6 -m http_server_base [port] [arguments]
+```
+Default port is 80 if allowed, else 8080
+Arguments should be passed in format `name=value`
+
+### Useful Links
+ - [Tornado Project Page](http://www.tornadoweb.org/en/stable/)
+ - [Python 3.6.0 Release Notes](https://www.python.org/downloads/release/python-360/)
+
+

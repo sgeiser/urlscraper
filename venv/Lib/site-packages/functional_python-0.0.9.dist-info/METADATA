@@ -1,0 +1,149 @@
+Metadata-Version: 2.1
+Name: functional-python
+Version: 0.0.9
+Summary: Python implementation of Scala-like monadic data types.
+Home-page: https://gitlab.com/Hares-Lab/functional-python
+License: BSD 2-Clause License
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Requires-Python: >=3.6.0
+Description-Content-Type: text/markdown
+Requires-Dist: dataclasses (>=0.6) ; python_version == "3.6"
+Provides-Extra: test
+Requires-Dist: html-testRunner (>=1.2) ; extra == 'test'
+Provides-Extra: all
+Requires-Dist: html-testRunner (>=1.2) ; extra == 'all'
+
+# Functional Python - Scala-like monadic data types
+
+**Functional Python** is a framework which implements Scala-like monadic data types,
+such as [Option](https://scala-lang.org/api/2.13.x/scala/Option.html) or [Map](https://docs.scala-lang.org/overviews/collections/maps.html).
+
+## Why?
+##### Method chaining
+```python
+# ToDo: Example
+```
+
+##### Type Safety
+```python
+# ToDo: Example
+```
+
+## Api Description
+### Options
+Represents optional values.
+Instances of Option are either an instance of Some or the object None.
+Options are generics of single type parameter.
+
+##### Creating an Option
+```python
+from functional.option import *
+
+# Scala-like constructor
+x = Some(4)      # Some(4)
+y = Option.empty # None
+z = none         # None
+
+# Python-like constructor
+x = Option(4)    # Some(4)
+y = Option(None) # None
+```
+
+Note that `None` which is printed **is not** Python `None`
+but is special object which does not contain any value and equals to `Option(None)`.
+
+##### Getting value of an Option
+Options implement `.get` property and `.getOrElse(default)` method.
+First one checks Option is not empty and either returns value or throws an exception.
+Second one returns *default* instead of throwing an exception.
+
+```python
+from functional.option import *
+x = Some(4)      # Some(4)
+y = none         # None
+
+x.get            # 4
+y.get            # raises EmptyOption
+
+x.get_or_else(5) # 4
+y.get_or_else(5) # 5
+
+# .is_defined returns True if Option is not None
+x.is_defined     # True
+y.is_defined     # False
+
+# .is_empty is the opposite
+x.is_empty       # False
+y.is_empty       # True
+
+# .non_empty is the same as .is_defined
+x.non_empty      # True
+y.non_empty      # False
+```
+
+Note that unlike in Scala, this Option's `.get_or_else` is not lazy-evaluated,
+so this code will fail:
+```python
+Some(4).get_or_else(1/0)
+```
+
+To prevent, it is recommended use python-like accessors (see below).
+
+##### Mapping an Option
+Options are both functors and monads, meaning they possess `.map()` and `.flat_map()` methods
+with the following signatures (where object is a type `Option[A]`):
+ - `.map(f: A => B): Option[B]` - map value inside an Option.
+ - `.flat_map(f: A => Option[B]): Option[B]` - map value inside an Option to an Option.
+
+Both these methods work only on non-empty options, returning `Option.empty` for otherwise.
+
+```python
+from functional.option import *
+x = Some(4)            # Some(4)
+y = none               # None
+z = Some(6)            # Some(6)
+
+x.map(lambda v: v + 2) # Some(6)
+y.map(lambda v: v + 2) # None
+z.map(lambda v: v + 2) # Some(8)
+
+x.flat_map(lambda v: Some(v) if v < 5 else none) # Some(4)
+y.flat_map(lambda v: Some(v) if v < 5 else none) # None
+z.flat_map(lambda v: Some(v) if v < 5 else none) # None
+```
+
+##### Flattening an Option
+Sometimes you get an Option which contains Option.
+There is special property `.flatten` which converts `Option[Option[T]]` into `Option[T]`
+
+```python
+# ToDo: Example
+```
+
+##### Python-style accessors
+Options support python-like accessors / converters `__bool__`, `__iter__`, `__len__`, and `__enter__/__exit`.
+
+```python
+# ToDo: Example
+```
+
+### Map
+**TODO**
+
+## Plans
+ - Test coverage
+ - Support Maps (both mutable and immutable)
+ - Support Lists (both mutable and immutable)
+
+
